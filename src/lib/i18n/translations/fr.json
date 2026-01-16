@@ -1,0 +1,126 @@
+{
+  "common": {
+    "appName": "FanHub",
+    "changeTeam": "Changer d'Équipe",
+    "backToDashboard": "Retour au Tableau de Bord",
+    "search": "Rechercher",
+    "all": "Tous",
+    "loading": "Chargement...",
+    "noResults": "Aucun résultat trouvé"
+  },
+  "landing": {
+    "title": "FanHub",
+    "subtitle": "Votre Équipe, Votre Façon",
+    "description": "Suivez n'importe quelle équipe de football au monde. Obtenez des matchs en direct, des actualités, des statistiques de joueurs et des réactions de fans en un seul endroit.",
+    "chooseTeam": "Choisissez Votre Équipe",
+    "stats": {
+      "teams": "Équipes",
+      "languages": "Langues",
+      "updates": "Mises à Jour"
+    }
+  },
+  "teamSelection": {
+    "title": "Sélectionnez Votre Équipe",
+    "subtitle": "Choisissez l'équipe que vous voulez suivre",
+    "searchPlaceholder": "Rechercher équipes, pays, ligues...",
+    "tabs": {
+      "all": "Toutes les Équipes",
+      "national": "National",
+      "clubs": "Clubs"
+    }
+  },
+  "dashboard": {
+    "stats": {
+      "wins": "Victoires",
+      "draws": "Nuls",
+      "losses": "Défaites"
+    },
+    "nextMatch": "Prochain Match",
+    "navigation": {
+      "matches": "Matchs",
+      "squad": "Équipe",
+      "news": "Actualités",
+      "videos": "Vidéos"
+    }
+  },
+  "matches": {
+    "title": "Matchs",
+    "subtitle": "calendrier des matchs",
+    "filters": {
+      "all": "Tous les Matchs",
+      "upcoming": "À Venir",
+      "recent": "Récents"
+    },
+    "status": {
+      "upcoming": "À Venir",
+      "live": "En Direct",
+      "finished": "Terminé"
+    },
+    "home": "Domicile",
+    "away": "Extérieur",
+    "vs": "VS"
+  },
+  "players": {
+    "title": "Équipe",
+    "subtitle": "joueurs dans l'équipe",
+    "filters": {
+      "all": "Tous les Joueurs",
+      "goalkeepers": "Gardiens",
+      "defenders": "Défenseurs",
+      "midfielders": "Milieux",
+      "forwards": "Attaquants"
+    },
+    "positions": {
+      "goalkeeper": "Gardien",
+      "defender": "Défenseur",
+      "midfielder": "Milieu",
+      "forward": "Attaquant"
+    },
+    "stats": {
+      "apps": "MJ",
+      "goals": "Buts",
+      "assists": "Passes"
+    },
+    "yearsOld": "ans"
+  },
+  "news": {
+    "title": "Actualités",
+    "subtitle": "Dernières mises à jour sur",
+    "filters": {
+      "all": "Toutes les Actualités",
+      "match": "Rapports de Match",
+      "transfer": "Transferts",
+      "injury": "Blessures",
+      "general": "Général"
+    },
+    "categories": {
+      "match": "Match",
+      "transfer": "Transfert",
+      "injury": "Blessure",
+      "general": "Général"
+    },
+    "source": "Source",
+    "readMore": "Lire Plus",
+    "noArticles": "Aucun article d'actualité trouvé dans cette catégorie."
+  },
+  "reactions": {
+    "title": "Réactions des Fans",
+    "subtitle": "Regardez les réactions des fans et les moments forts",
+    "searchPlaceholder": "Rechercher des réactions par match, équipe ou chaîne...",
+    "views": "vues",
+    "noVideos": "Pas Encore de Vidéos Disponibles",
+    "noVideosDescription": "Les vidéos apparaîtront ici après les matchs",
+    "noResults": "Aucun Résultat Trouvé",
+    "noResultsDescription": "Essayez un terme de recherche différent",
+    "comingSoon": "Bientôt : Intégration YouTube",
+    "comingSoonDescription": "Ce sont des vidéos de remplacement. Dans les prochaines étapes, nous intégrerons l'API YouTube pour récupérer automatiquement de vraies vidéos de réactions de fans !"
+  },
+  "time": {
+    "justNow": "À l'instant",
+    "hoursAgo": "il y a {hours}h",
+    "daysAgo": "il y a {days}j",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "weeksAgo": "il y a {weeks} semaines"
+  }
+}
