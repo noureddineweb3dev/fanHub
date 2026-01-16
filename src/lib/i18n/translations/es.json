@@ -1,0 +1,126 @@
+{
+  "common": {
+    "appName": "FanHub",
+    "changeTeam": "Cambiar Equipo",
+    "backToDashboard": "Volver al Panel",
+    "search": "Buscar",
+    "all": "Todos",
+    "loading": "Cargando...",
+    "noResults": "No se encontraron resultados"
+  },
+  "landing": {
+    "title": "FanHub",
+    "subtitle": "Tu Equipo, Tu Manera",
+    "description": "Sigue cualquier equipo de fútbol del mundo. Obtén partidos en vivo, noticias, estadísticas de jugadores y reacciones de aficionados en un solo lugar.",
+    "chooseTeam": "Elige Tu Equipo",
+    "stats": {
+      "teams": "Equipos",
+      "languages": "Idiomas",
+      "updates": "Actualizaciones"
+    }
+  },
+  "teamSelection": {
+    "title": "Selecciona Tu Equipo",
+    "subtitle": "Elige el equipo que quieres seguir",
+    "searchPlaceholder": "Buscar equipos, países, ligas...",
+    "tabs": {
+      "all": "Todos los Equipos",
+      "national": "Nacional",
+      "clubs": "Clubes"
+    }
+  },
+  "dashboard": {
+    "stats": {
+      "wins": "Victorias",
+      "draws": "Empates",
+      "losses": "Derrotas"
+    },
+    "nextMatch": "Próximo Partido",
+    "navigation": {
+      "matches": "Partidos",
+      "squad": "Plantilla",
+      "news": "Noticias",
+      "videos": "Videos"
+    }
+  },
+  "matches": {
+    "title": "Partidos",
+    "subtitle": "calendario de partidos",
+    "filters": {
+      "all": "Todos los Partidos",
+      "upcoming": "Próximos",
+      "recent": "Recientes"
+    },
+    "status": {
+      "upcoming": "Próximo",
+      "live": "En Vivo",
+      "finished": "Finalizado"
+    },
+    "home": "Local",
+    "away": "Visitante",
+    "vs": "VS"
+  },
+  "players": {
+    "title": "Plantilla",
+    "subtitle": "jugadores en la plantilla",
+    "filters": {
+      "all": "Todos los Jugadores",
+      "goalkeepers": "Porteros",
+      "defenders": "Defensas",
+      "midfielders": "Centrocampistas",
+      "forwards": "Delanteros"
+    },
+    "positions": {
+      "goalkeeper": "Portero",
+      "defender": "Defensa",
+      "midfielder": "Centrocampista",
+      "forward": "Delantero"
+    },
+    "stats": {
+      "apps": "PJ",
+      "goals": "Goles",
+      "assists": "Asist"
+    },
+    "yearsOld": "años"
+  },
+  "news": {
+    "title": "Noticias",
+    "subtitle": "Últimas actualizaciones sobre",
+    "filters": {
+      "all": "Todas las Noticias",
+      "match": "Informes de Partidos",
+      "transfer": "Traspasos",
+      "injury": "Lesiones",
+      "general": "General"
+    },
+    "categories": {
+      "match": "Partido",
+      "transfer": "Traspaso",
+      "injury": "Lesión",
+      "general": "General"
+    },
+    "source": "Fuente",
+    "readMore": "Leer Más",
+    "noArticles": "No se encontraron artículos de noticias en esta categoría."
+  },
+  "reactions": {
+    "title": "Reacciones de Aficionados",
+    "subtitle": "Ver reacciones de aficionados y momentos destacados",
+    "searchPlaceholder": "Buscar reacciones por partido, equipo o canal...",
+    "views": "visualizaciones",
+    "noVideos": "Aún No Hay Videos Disponibles",
+    "noVideosDescription": "Los videos aparecerán aquí después de que se jueguen los partidos",
+    "noResults": "No Se Encontraron Resultados",
+    "noResultsDescription": "Prueba con un término de búsqueda diferente",
+    "comingSoon": "Próximamente: Integración de YouTube",
+    "comingSoonDescription": "Estos son videos de marcador de posición. En los próximos pasos, integraremos la API de YouTube para obtener videos reales de reacciones de aficionados automáticamente."
+  },
+  "time": {
+    "justNow": "Justo ahora",
+    "hoursAgo": "hace {hours}h",
+    "daysAgo": "hace {days}d",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "weeksAgo": "hace {weeks} semanas"
+  }
+}
