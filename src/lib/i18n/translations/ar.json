@@ -1,0 +1,126 @@
+{
+  "common": {
+    "appName": "فان هاب",
+    "changeTeam": "تغيير الفريق",
+    "backToDashboard": "العودة إلى لوحة التحكم",
+    "search": "بحث",
+    "all": "الكل",
+    "loading": "جار التحميل...",
+    "noResults": "لم يتم العثور على نتائج"
+  },
+  "landing": {
+    "title": "فان هاب",
+    "subtitle": "فريقك، طريقتك",
+    "description": "تابع أي فريق كرة قدم في العالم. احصل على المباريات المباشرة والأخبار وإحصائيات اللاعبين وردود أفعال المشجعين في مكان واحد.",
+    "chooseTeam": "اختر فريقك",
+    "stats": {
+      "teams": "الفرق",
+      "languages": "اللغات",
+      "updates": "التحديثات"
+    }
+  },
+  "teamSelection": {
+    "title": "اختر فريقك",
+    "subtitle": "اختر الفريق الذي تريد متابعته",
+    "searchPlaceholder": "ابحث عن الفرق والدول والدوريات...",
+    "tabs": {
+      "all": "جميع الفرق",
+      "national": "المنتخبات",
+      "clubs": "الأندية"
+    }
+  },
+  "dashboard": {
+    "stats": {
+      "wins": "الانتصارات",
+      "draws": "التعادلات",
+      "losses": "الهزائم"
+    },
+    "nextMatch": "المباراة القادمة",
+    "navigation": {
+      "matches": "المباريات",
+      "squad": "التشكيلة",
+      "news": "الأخبار",
+      "videos": "الفيديوهات"
+    }
+  },
+  "matches": {
+    "title": "المباريات",
+    "subtitle": "جدول المباريات",
+    "filters": {
+      "all": "جميع المباريات",
+      "upcoming": "القادمة",
+      "recent": "السابقة"
+    },
+    "status": {
+      "upcoming": "قادمة",
+      "live": "مباشر",
+      "finished": "انتهت"
+    },
+    "home": "على أرضه",
+    "away": "خارج أرضه",
+    "vs": "ضد"
+  },
+  "players": {
+    "title": "التشكيلة",
+    "subtitle": "لاعب في التشكيلة",
+    "filters": {
+      "all": "جميع اللاعبين",
+      "goalkeepers": "حراس المرمى",
+      "defenders": "المدافعون",
+      "midfielders": "لاعبو الوسط",
+      "forwards": "المهاجمون"
+    },
+    "positions": {
+      "goalkeeper": "حارس مرمى",
+      "defender": "مدافع",
+      "midfielder": "لاعب وسط",
+      "forward": "مهاجم"
+    },
+    "stats": {
+      "apps": "المباريات",
+      "goals": "الأهداف",
+      "assists": "التمريرات"
+    },
+    "yearsOld": "سنة"
+  },
+  "news": {
+    "title": "الأخبار",
+    "subtitle": "آخر التحديثات عن",
+    "filters": {
+      "all": "جميع الأخبار",
+      "match": "تقارير المباريات",
+      "transfer": "الانتقالات",
+      "injury": "الإصابات",
+      "general": "عام"
+    },
+    "categories": {
+      "match": "مباراة",
+      "transfer": "انتقال",
+      "injury": "إصابة",
+      "general": "عام"
+    },
+    "source": "المصدر",
+    "readMore": "اقرأ المزيد",
+    "noArticles": "لم يتم العثور على مقالات إخبارية في هذه الفئة."
+  },
+  "reactions": {
+    "title": "ردود أفعال المشجعين",
+    "subtitle": "شاهد ردود أفعال المشجعين وأبرز اللحظات",
+    "searchPlaceholder": "ابحث عن ردود الأفعال حسب المباراة أو الفريق أو القناة...",
+    "views": "مشاهدة",
+    "noVideos": "لا توجد فيديوهات متاحة بعد",
+    "noVideosDescription": "ستظهر الفيديوهات هنا بعد إقامة المباريات",
+    "noResults": "لم يتم العثور على نتائج",
+    "noResultsDescription": "جرب مصطلح بحث مختلف",
+    "comingSoon": "قريباً: تكامل يوتيوب",
+    "comingSoonDescription": "هذه فيديوهات تجريبية. في الخطوات التالية، سنقوم بدمج واجهة برمجة تطبيقات YouTube لجلب فيديوهات ردود أفعال المشجعين الحقيقية تلقائياً!"
+  },
+  "time": {
+    "justNow": "الآن",
+    "hoursAgo": "منذ {hours}س",
+    "daysAgo": "منذ {days}ي",
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "weeksAgo": "منذ {weeks} أسابيع"
+  }
+}
