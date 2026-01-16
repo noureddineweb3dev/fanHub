@@ -1,0 +1,126 @@
+{
+  "common": {
+    "appName": "FanHub",
+    "changeTeam": "Change Team",
+    "backToDashboard": "Back to Dashboard",
+    "search": "Search",
+    "all": "All",
+    "loading": "Loading...",
+    "noResults": "No results found"
+  },
+  "landing": {
+    "title": "FanHub",
+    "subtitle": "Your Team, Your Way",
+    "description": "Track any football team in the world. Get live matches, news, player stats, and fan reactions all in one place.",
+    "chooseTeam": "Choose Your Team",
+    "stats": {
+      "teams": "Teams",
+      "languages": "Languages",
+      "updates": "Updates"
+    }
+  },
+  "teamSelection": {
+    "title": "Select Your Team",
+    "subtitle": "Choose the team you want to follow",
+    "searchPlaceholder": "Search teams, countries, leagues...",
+    "tabs": {
+      "all": "All Teams",
+      "national": "National",
+      "clubs": "Clubs"
+    }
+  },
+  "dashboard": {
+    "stats": {
+      "wins": "Wins",
+      "draws": "Draws",
+      "losses": "Losses"
+    },
+    "nextMatch": "Next Match",
+    "navigation": {
+      "matches": "Matches",
+      "squad": "Squad",
+      "news": "News",
+      "videos": "Videos"
+    }
+  },
+  "matches": {
+    "title": "Matches",
+    "subtitle": "fixture schedule",
+    "filters": {
+      "all": "All Matches",
+      "upcoming": "Upcoming",
+      "recent": "Recent"
+    },
+    "status": {
+      "upcoming": "Upcoming",
+      "live": "Live",
+      "finished": "Full Time"
+    },
+    "home": "Home",
+    "away": "Away",
+    "vs": "VS"
+  },
+  "players": {
+    "title": "Squad",
+    "subtitle": "players in the squad",
+    "filters": {
+      "all": "All Players",
+      "goalkeepers": "Goalkeepers",
+      "defenders": "Defenders",
+      "midfielders": "Midfielders",
+      "forwards": "Forwards"
+    },
+    "positions": {
+      "goalkeeper": "Goalkeeper",
+      "defender": "Defender",
+      "midfielder": "Midfielder",
+      "forward": "Forward"
+    },
+    "stats": {
+      "apps": "Apps",
+      "goals": "Goals",
+      "assists": "Assists"
+    },
+    "yearsOld": "years old"
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest updates about",
+    "filters": {
+      "all": "All News",
+      "match": "Match Reports",
+      "transfer": "Transfers",
+      "injury": "Injuries",
+      "general": "General"
+    },
+    "categories": {
+      "match": "Match",
+      "transfer": "Transfer",
+      "injury": "Injury",
+      "general": "General"
+    },
+    "source": "Source",
+    "readMore": "Read More",
+    "noArticles": "No news articles found in this category."
+  },
+  "reactions": {
+    "title": "Fan Reactions",
+    "subtitle": "Watch fan reactions and highlights",
+    "searchPlaceholder": "Search reactions by match, team, or channel...",
+    "views": "views",
+    "noVideos": "No Videos Available Yet",
+    "noVideosDescription": "Videos will appear here after matches are played",
+    "noResults": "No Results Found",
+    "noResultsDescription": "Try a different search term",
+    "comingSoon": "Coming Soon: YouTube Integration",
+    "comingSoonDescription": "These are placeholder videos. In the next steps, we'll integrate the YouTube API to fetch real fan reaction videos automatically!"
+  },
+  "time": {
+    "justNow": "Just now",
+    "hoursAgo": "{hours}h ago",
+    "daysAgo": "{days}d ago",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "weeksAgo": "{weeks} weeks ago"
+  }
+}
