@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 
 export default function TeamDashboardPage() {
   const params = useParams();
+  const locale = params.locale as string;
   const teamId = params.teamId as string;
   const team = getTeamById(teamId);
   const t = useTranslations('dashboard');
@@ -19,8 +20,8 @@ export default function TeamDashboardPage() {
         <div className="text-center">
           <div className="text-6xl mb-4">⚠️</div>
           <h1 className="text-2xl font-bold mb-2">Team Not Found</h1>
-          <Link href="/select-team" className="text-team-primary hover:underline">
-            Choose a different team
+          <Link href={`/${locale}/select-team`} className="text-team-primary hover:underline">
+            {tCommon('changeTeam')}
           </Link>
         </div>
       </div>
@@ -32,7 +33,7 @@ export default function TeamDashboardPage() {
       <div className="gradient-team text-white">
         <div className="max-w-4xl mx-auto px-6 py-8">
           <Link
-            href="/select-team"
+            href={`/${locale}/select-team`}
             className="inline-flex items-center gap-2 mb-6 opacity-90 hover:opacity-100 transition-opacity"
           >
             <ArrowLeft size={20} />
@@ -54,22 +55,26 @@ export default function TeamDashboardPage() {
       <div className="max-w-4xl mx-auto px-6 py-8">
         <div className="grid grid-cols-3 gap-4 mb-8">
           <div className="bg-background-card rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-status-success mb-1">{t('stats.wins')}</div>
-            <div className="text-sm text-text-muted uppercase tracking-wide">Wins</div>
+            <div className="text-3xl font-bold text-status-success mb-1">12</div>
+            <div className="text-sm text-text-muted uppercase tracking-wide">{t('stats.wins')}</div>
           </div>
           <div className="bg-background-card rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-status-warning mb-1">{t('stats.draws')}</div>
-            <div className="text-sm text-text-muted uppercase tracking-wide">Draws</div>
+            <div className="text-3xl font-bold text-status-warning mb-1">5</div>
+            <div className="text-sm text-text-muted uppercase tracking-wide">
+              {t('stats.draws')}
+            </div>
           </div>
           <div className="bg-background-card rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-status-danger mb-1">{t('stats.losses')}</div>
-            <div className="text-sm text-text-muted uppercase tracking-wide">Losses</div>
+            <div className="text-3xl font-bold text-status-danger mb-1">3</div>
+            <div className="text-sm text-text-muted uppercase tracking-wide">
+              {t('stats.losses')}
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <Link
-            href={`/team/${team.id}/matches`}
+            href={`/${locale}/team/${team.id}/matches`}
             className="bg-background-card hover:bg-background-light rounded-xl p-6 text-center transition-colors group"
           >
             <Trophy
@@ -80,7 +85,7 @@ export default function TeamDashboardPage() {
           </Link>
 
           <Link
-            href={`/team/${team.id}/players`}
+            href={`/${locale}/team/${team.id}/players`}
             className="bg-background-card hover:bg-background-light rounded-xl p-6 text-center transition-colors group"
           >
             <Users
@@ -91,7 +96,7 @@ export default function TeamDashboardPage() {
           </Link>
 
           <Link
-            href={`/team/${team.id}/news`}
+            href={`/${locale}/team/${team.id}/news`}
             className="bg-background-card hover:bg-background-light rounded-xl p-6 text-center transition-colors group"
           >
             <Newspaper
@@ -102,7 +107,7 @@ export default function TeamDashboardPage() {
           </Link>
 
           <Link
-            href={`/team/${team.id}/reactions`}
+            href={`/${locale}/team/${team.id}/reactions`}
             className="bg-background-card hover:bg-background-light rounded-xl p-6 text-center transition-colors group"
           >
             <Video
@@ -114,7 +119,7 @@ export default function TeamDashboardPage() {
         </div>
 
         <div className="mt-8 bg-background-card rounded-xl p-6">
-          <h2 className="text-xl font-bold mb-4">🔜 {t('nextMatch')}</h2>
+          <h2 className="text-xl font-bold mb-4">{t('nextMatch')}</h2>
           <div className="bg-background-light rounded-lg p-4">
             <div className="text-sm text-text-muted mb-3">📅 January 20, 2026 • 20:00 GMT</div>
             <div className="flex items-center justify-between mb-3">
