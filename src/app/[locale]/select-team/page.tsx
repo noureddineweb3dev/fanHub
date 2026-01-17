@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { teams, getTeamsByType, searchTeams } from '@/data/teams';
 import { Team } from '@/lib/types/team';
 import { Search } from 'lucide-react';
@@ -9,10 +9,13 @@ import { useTranslations } from 'next-intl';
 
 export default function SelectTeamPage() {
   const router = useRouter();
+  const params = useParams();
+  const locale = params.locale as string;
+  const t = useTranslations('teamSelection');
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTab, setSelectedTab] = useState<'all' | 'national' | 'club'>('all');
-  const t = useTranslations('teamSelection');
-  const tCommon = useTranslations('common');
+
   const filteredTeams = searchQuery
     ? searchTeams(searchQuery)
     : selectedTab === 'all'
@@ -21,7 +24,7 @@ export default function SelectTeamPage() {
 
   const handleTeamSelect = (team: Team) => {
     localStorage.setItem('selectedTeam', team.id);
-    router.push(`/team/${team.id}`);
+    router.push(`/${locale}/team/${team.id}`);
   };
 
   return (
@@ -108,9 +111,7 @@ export default function SelectTeamPage() {
         </div>
 
         {filteredTeams.length === 0 && (
-          <div className="text-center py-12 text-text-muted">
-            No teams found. Try a different search term.
-          </div>
+          <div className="text-center py-12 text-text-muted">{t('searchPlaceholder')}</div>
         )}
       </div>
     </main>
