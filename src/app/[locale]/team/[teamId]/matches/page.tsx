@@ -150,7 +150,7 @@ export default function MatchesPage() {
                       : `${match.score.away} - ${match.score.home}`}
                   </div>
                 ) : (
-                  <div className="text-2xl font-bold text-text-muted shrink-0">VS</div>
+                  <div className="text-2xl font-bold text-text-muted shrink-0">{t('vs')}</div>
                 )}
 
                 <div className="flex items-center gap-4 flex-1 justify-end min-w-0">

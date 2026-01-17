@@ -37,6 +37,10 @@
       "losses": "Défaites"
     },
     "nextMatch": "Prochain Match",
+    "vs": "VS",
+    "tbd": "À Déterminer",
+    "upcomingCompetition": "Compétition à Venir",
+    "tbdStadium": "Stade À Déterminer",
     "navigation": {
       "matches": "Matchs",
       "squad": "Équipe",

@@ -168,10 +168,10 @@ export default function NewsPage() {
 
               <div className="flex items-center justify-between pt-4 border-t border-background-light gap-4">
                 <span className="text-sm text-text-muted">
-                  Source: <span className="font-medium">{article.source}</span>
+                  {t('source')}: <span className="font-medium">{article.source}</span>
                 </span>
                 <button className="text-team-primary hover:underline flex items-center gap-1 text-sm font-medium whitespace-nowrap">
-                  Read More <ExternalLink size={14} />
+                  {t('readMore')} <ExternalLink size={14} />
                 </button>
               </div>
             </div>

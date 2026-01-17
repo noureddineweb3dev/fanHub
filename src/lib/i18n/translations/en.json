@@ -37,6 +37,10 @@
       "losses": "Losses"
     },
     "nextMatch": "Next Match",
+    "vs": "VS",
+    "tbd": "TBD",
+    "upcomingCompetition": "Upcoming Competition",
+    "tbdStadium": "TBD Stadium",
     "navigation": {
       "matches": "Matches",
       "squad": "Squad",

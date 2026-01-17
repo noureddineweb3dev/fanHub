@@ -13,6 +13,7 @@ export default function SelectTeamPage() {
   const params = useParams();
   const locale = params.locale as string;
   const t = useTranslations('teamSelection');
+  const tCommon = useTranslations('common');
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTab, setSelectedTab] = useState<'all' | 'national' | 'club'>('all');
@@ -115,7 +116,7 @@ export default function SelectTeamPage() {
         </div>
 
         {filteredTeams.length === 0 && (
-          <div className="text-center py-12 text-text-muted">{t('searchPlaceholder')}</div>
+          <div className="text-center py-12 text-text-muted">{tCommon('noResults')}</div>
         )}
       </div>
     </main>

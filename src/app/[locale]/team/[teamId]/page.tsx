@@ -131,15 +131,15 @@ export default function TeamDashboardPage() {
                 <div className="text-3xl">{team.flag}</div>
                 <div className="font-semibold">{team.name}</div>
               </div>
-              <div className="text-xl font-bold text-team-primary">VS</div>
+              <div className="text-xl font-bold text-team-primary">{t('vs')}</div>
               <div className="flex items-center gap-3">
-                <div className="font-semibold">TBD</div>
+                <div className="font-semibold">{t('tbd')}</div>
                 <div className="text-3xl">⚽</div>
               </div>
             </div>
             <div className="text-sm text-text-muted flex gap-4">
-              <span>🏆 Upcoming Competition</span>
-              <span>🏟️ TBD Stadium</span>
+              <span>🏆 {t('upcomingCompetition')}</span>
+              <span>🏟️ {t('tbdStadium')}</span>
             </div>
           </div>
         </div>

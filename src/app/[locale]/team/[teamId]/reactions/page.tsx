@@ -18,6 +18,7 @@ export default function ReactionsPage() {
   const t = useTranslations('reactions');
   const tCommon = useTranslations('common');
   const tTime = useTranslations('time');
+  const tMatches = useTranslations('matches');
 
   if (!team) {
     return (
@@ -33,10 +34,11 @@ export default function ReactionsPage() {
   }
 
   const recentMatches = getRecentMatches(teamId);
+  const vsText = tMatches('vs');
 
   const mockVideos = recentMatches.map((match, index) => ({
     id: `video-${index}`,
-    title: `${team.name} vs ${match.opponent} ${match.score?.home}-${match.score?.away} - Fan Reactions & Highlights`,
+    title: `${team.name} ${vsText} ${match.opponent} ${match.score?.home}-${match.score?.away} - Fan Reactions & Highlights`,
     channelName: index % 2 === 0 ? 'Football Highlights HD' : 'Fan Reactions World',
     views: Math.floor(Math.random() * 500000) + 50000,
     uploadedAt: match.date,

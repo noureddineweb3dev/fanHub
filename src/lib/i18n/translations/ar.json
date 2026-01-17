@@ -37,6 +37,10 @@
       "losses": "الهزائم"
     },
     "nextMatch": "المباراة القادمة",
+    "vs": "ضد",
+    "tbd": "قيد التحديد",
+    "upcomingCompetition": "البطولة القادمة",
+    "tbdStadium": "الملعب قيد التحديد",
     "navigation": {
       "matches": "المباريات",
       "squad": "التشكيلة",
