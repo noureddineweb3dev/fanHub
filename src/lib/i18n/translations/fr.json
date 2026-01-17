@@ -3,6 +3,7 @@
     "appName": "FanHub",
     "changeTeam": "Changer d'Équipe",
     "backToDashboard": "Retour au Tableau de Bord",
+    "teamNotFound": "Équipe Non Trouvée",
     "search": "Rechercher",
     "all": "Tous",
     "loading": "Chargement...",
@@ -58,7 +59,8 @@
     },
     "home": "Domicile",
     "away": "Extérieur",
-    "vs": "VS"
+    "vs": "VS",
+    "noMatches": "Aucun match trouvé."
   },
   "players": {
     "title": "Équipe",
@@ -81,7 +83,8 @@
       "goals": "Buts",
       "assists": "Passes"
     },
-    "yearsOld": "ans"
+    "yearsOld": "ans",
+    "noPlayers": "Aucun joueur trouvé à ce poste."
   },
   "news": {
     "title": "Actualités",

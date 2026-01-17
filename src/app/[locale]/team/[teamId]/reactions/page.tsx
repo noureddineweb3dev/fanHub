@@ -6,20 +6,26 @@ import Link from 'next/link';
 import { getTeamById } from '@/data/teams';
 import { getRecentMatches } from '@/data/matches';
 import { ArrowLeft, Search, Play, Eye, Clock } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export default function ReactionsPage() {
   const params = useParams();
+  const locale = params.locale as string;
   const teamId = params.teamId as string;
   const team = getTeamById(teamId);
   const [searchQuery, setSearchQuery] = useState('');
+  const t = useTranslations('reactions');
+  const tCommon = useTranslations('common');
+  const tTime = useTranslations('time');
 
   if (!team) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Team Not Found</h1>
-          <Link href="/select-team" className="text-team-primary hover:underline">
-            Choose a different team
+          <h1 className="text-2xl font-bold mb-2">{tCommon('teamNotFound')}</h1>
+          <Link href={`/${locale}/select-team`} className="text-team-primary hover:underline">
+            {tCommon('changeTeam')}
           </Link>
         </div>
       </div>
@@ -63,27 +69,30 @@ export default function ReactionsPage() {
     const now = new Date();
     const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
 
-    if (diffDays === 0) return 'Today';
-    if (diffDays === 1) return 'Yesterday';
-    if (diffDays < 7) return `${diffDays} days ago`;
-    if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    if (diffDays === 0) return tTime('today');
+    if (diffDays === 1) return tTime('yesterday');
+    if (diffDays < 7) return tTime('daysAgo', { days: diffDays });
+    if (diffDays < 30) return tTime('weeksAgo', { weeks: Math.floor(diffDays / 7) });
+    return date.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
   };
 
   return (
     <main className="min-h-screen pb-8">
       <div className="gradient-team text-white">
         <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="absolute top-6 end-6">
+            <LanguageSwitcher />
+          </div>
           <Link
-            href={`/team/${teamId}`}
+            href={`/${locale}/team/${teamId}`}
             className="inline-flex items-center gap-2 mb-6 opacity-90 hover:opacity-100 transition-opacity"
           >
             <ArrowLeft size={20} />
-            Back to Dashboard
+            {tCommon('backToDashboard')}
           </Link>
 
-          <h1 className="text-4xl font-bold">Fan Reactions</h1>
-          <p className="text-lg opacity-90 mt-2">Watch fan reactions and highlights</p>
+          <h1 className="text-4xl font-bold">{t('title')}</h1>
+          <p className="text-lg opacity-90 mt-2">{t('subtitle')}</p>
         </div>
       </div>
 
@@ -96,7 +105,7 @@ export default function ReactionsPage() {
             />
             <input
               type="text"
-              placeholder="Search reactions by match, team, or channel..."
+              placeholder={t('searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-background-card border border-background-light rounded-xl py-4 ps-12 pe-4 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-team-primary transition-colors"
@@ -107,16 +116,16 @@ export default function ReactionsPage() {
         {filteredVideos.length === 0 && recentMatches.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">📺</div>
-            <h3 className="text-xl font-bold mb-2">No Videos Available Yet</h3>
-            <p className="text-text-muted">Videos will appear here after matches are played</p>
+            <h3 className="text-xl font-bold mb-2">{t('noVideos')}</h3>
+            <p className="text-text-muted">{t('noVideosDescription')}</p>
           </div>
         )}
 
         {filteredVideos.length === 0 && recentMatches.length > 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-bold mb-2">No Results Found</h3>
-            <p className="text-text-muted">Try a different search term</p>
+            <h3 className="text-xl font-bold mb-2">{t('noResults')}</h3>
+            <p className="text-text-muted">{t('noResultsDescription')}</p>
           </div>
         )}
 
@@ -155,7 +164,7 @@ export default function ReactionsPage() {
                 <div className="flex items-center gap-3 text-xs text-text-muted">
                   <span className="flex items-center gap-1">
                     <Eye size={14} />
-                    {formatViews(video.views)} views
+                    {formatViews(video.views)} {t('views')}
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock size={14} />
@@ -171,10 +180,9 @@ export default function ReactionsPage() {
           <div className="mt-8 p-6 bg-background-card rounded-xl border-2 border-dashed border-background-light">
             <div className="text-center">
               <div className="text-4xl mb-3">🚀</div>
-              <h3 className="font-bold text-lg mb-2">Coming Soon: YouTube Integration</h3>
+              <h3 className="font-bold text-lg mb-2">{t('comingSoon')}</h3>
               <p className="text-text-muted text-sm">
-                These are placeholder videos. In the next steps, we'll integrate the YouTube API to
-                fetch real fan reaction videos automatically!
+                {t('comingSoonDescription')}
               </p>
             </div>
           </div>

@@ -3,6 +3,7 @@
     "appName": "FanHub",
     "changeTeam": "Cambiar Equipo",
     "backToDashboard": "Volver al Panel",
+    "teamNotFound": "Equipo No Encontrado",
     "search": "Buscar",
     "all": "Todos",
     "loading": "Cargando...",
@@ -58,7 +59,8 @@
     },
     "home": "Local",
     "away": "Visitante",
-    "vs": "VS"
+    "vs": "VS",
+    "noMatches": "No se encontraron partidos."
   },
   "players": {
     "title": "Plantilla",
@@ -81,7 +83,8 @@
       "goals": "Goles",
       "assists": "Asist"
     },
-    "yearsOld": "años"
+    "yearsOld": "años",
+    "noPlayers": "No se encontraron jugadores en esta posición."
   },
   "news": {
     "title": "Noticias",

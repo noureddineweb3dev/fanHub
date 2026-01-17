@@ -7,20 +7,26 @@ import { getTeamById } from '@/data/teams';
 import { getNewsByTeam, getNewsByCategory } from '@/data/news';
 import { NewsArticle } from '@/lib/types/news';
 import { ArrowLeft, Clock, ExternalLink } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export default function NewsPage() {
   const params = useParams();
+  const locale = params.locale as string;
   const teamId = params.teamId as string;
   const team = getTeamById(teamId);
   const [categoryFilter, setCategoryFilter] = useState<'all' | NewsArticle['category']>('all');
+  const t = useTranslations('news');
+  const tCommon = useTranslations('common');
+  const tTime = useTranslations('time');
 
   if (!team) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Team Not Found</h1>
-          <Link href="/select-team" className="text-team-primary hover:underline">
-            Choose a different team
+          <h1 className="text-2xl font-bold mb-2">{tCommon('teamNotFound')}</h1>
+          <Link href={`/${locale}/select-team`} className="text-team-primary hover:underline">
+            {tCommon('changeTeam')}
           </Link>
         </div>
       </div>
@@ -38,10 +44,10 @@ export default function NewsPage() {
     const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
     const diffDays = Math.floor(diffHours / 24);
 
-    if (diffHours < 1) return 'Just now';
-    if (diffHours < 24) return `${diffHours}h ago`;
-    if (diffDays < 7) return `${diffDays}d ago`;
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    if (diffHours < 1) return tTime('justNow');
+    if (diffHours < 24) return tTime('hoursAgo', { hours: diffHours });
+    if (diffDays < 7) return tTime('daysAgo', { days: diffDays });
+    return date.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
   };
 
   const getCategoryColor = (category: NewsArticle['category']) => {
@@ -58,23 +64,28 @@ export default function NewsPage() {
   };
 
   const getCategoryLabel = (category: NewsArticle['category']) => {
-    return category.charAt(0).toUpperCase() + category.slice(1);
+    return t(`categories.${category}`);
   };
 
   return (
     <main className="min-h-screen pb-8">
       <div className="gradient-team text-white">
         <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="absolute top-6 end-6">
+            <LanguageSwitcher />
+          </div>
           <Link
-            href={`/team/${teamId}`}
+            href={`/${locale}/team/${teamId}`}
             className="inline-flex items-center gap-2 mb-6 opacity-90 hover:opacity-100 transition-opacity"
           >
             <ArrowLeft size={20} />
-            Back to Dashboard
+            {tCommon('backToDashboard')}
           </Link>
 
-          <h1 className="text-4xl font-bold">News</h1>
-          <p className="text-lg opacity-90 mt-2">Latest updates about {team.name}</p>
+          <h1 className="text-4xl font-bold">{t('title')}</h1>
+          <p className="text-lg opacity-90 mt-2">
+            {t('subtitle')} {team.name}
+          </p>
         </div>
       </div>
 
@@ -88,7 +99,7 @@ export default function NewsPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            All News
+            {t('filters.all')}
           </button>
           <button
             onClick={() => setCategoryFilter('match')}
@@ -98,7 +109,7 @@ export default function NewsPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Match Reports
+            {t('filters.match')}
           </button>
           <button
             onClick={() => setCategoryFilter('transfer')}
@@ -108,7 +119,7 @@ export default function NewsPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Transfers
+            {t('filters.transfer')}
           </button>
           <button
             onClick={() => setCategoryFilter('injury')}
@@ -118,7 +129,7 @@ export default function NewsPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Injuries
+            {t('filters.injury')}
           </button>
           <button
             onClick={() => setCategoryFilter('general')}
@@ -128,7 +139,7 @@ export default function NewsPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            General
+            {t('filters.general')}
           </button>
         </div>
 
@@ -170,7 +181,7 @@ export default function NewsPage() {
         {displayNews.length === 0 && (
           <div className="text-center py-12 text-text-muted">
             <div className="text-5xl mb-4">📰</div>
-            <div className="text-lg">No news articles found in this category.</div>
+            <div className="text-lg">{t('noArticles')}</div>
           </div>
         )}
       </div>

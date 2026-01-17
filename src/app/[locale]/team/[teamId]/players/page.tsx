@@ -7,20 +7,25 @@ import { getTeamById } from '@/data/teams';
 import { getPlayersByTeam, getPlayersByPosition } from '@/data/players';
 import { Player } from '@/lib/types/player';
 import { ArrowLeft } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export default function PlayersPage() {
   const params = useParams();
+  const locale = params.locale as string;
   const teamId = params.teamId as string;
   const team = getTeamById(teamId);
   const [positionFilter, setPositionFilter] = useState<'all' | Player['position']>('all');
+  const t = useTranslations('players');
+  const tCommon = useTranslations('common');
 
   if (!team) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Team Not Found</h1>
-          <Link href="/select-team" className="text-team-primary hover:underline">
-            Choose a different team
+          <h1 className="text-2xl font-bold mb-2">{tCommon('teamNotFound')}</h1>
+          <Link href={`/${locale}/select-team`} className="text-team-primary hover:underline">
+            {tCommon('changeTeam')}
           </Link>
         </div>
       </div>
@@ -47,13 +52,13 @@ export default function PlayersPage() {
   const getPositionName = (position: Player['position']) => {
     switch (position) {
       case 'GK':
-        return 'Goalkeeper';
+        return t('positions.goalkeeper');
       case 'DEF':
-        return 'Defender';
+        return t('positions.defender');
       case 'MID':
-        return 'Midfielder';
+        return t('positions.midfielder');
       case 'FWD':
-        return 'Forward';
+        return t('positions.forward');
     }
   };
 
@@ -61,16 +66,21 @@ export default function PlayersPage() {
     <main className="min-h-screen pb-8">
       <div className="gradient-team text-white">
         <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="absolute top-6 end-6">
+            <LanguageSwitcher />
+          </div>
           <Link
-            href={`/team/${teamId}`}
+            href={`/${locale}/team/${teamId}`}
             className="inline-flex items-center gap-2 mb-6 opacity-90 hover:opacity-100 transition-opacity"
           >
             <ArrowLeft size={20} />
-            Back to Dashboard
+            {tCommon('backToDashboard')}
           </Link>
 
-          <h1 className="text-4xl font-bold">Squad</h1>
-          <p className="text-lg opacity-90 mt-2">{allPlayers.length} players in the squad</p>
+          <h1 className="text-4xl font-bold">{t('title')}</h1>
+          <p className="text-lg opacity-90 mt-2">
+            {allPlayers.length} {t('subtitle')}
+          </p>
         </div>
       </div>
 
@@ -84,7 +94,7 @@ export default function PlayersPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            All Players
+            {t('filters.all')}
           </button>
           <button
             onClick={() => setPositionFilter('GK')}
@@ -94,7 +104,7 @@ export default function PlayersPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Goalkeepers
+            {t('filters.goalkeepers')}
           </button>
           <button
             onClick={() => setPositionFilter('DEF')}
@@ -104,7 +114,7 @@ export default function PlayersPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Defenders
+            {t('filters.defenders')}
           </button>
           <button
             onClick={() => setPositionFilter('MID')}
@@ -114,7 +124,7 @@ export default function PlayersPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Midfielders
+            {t('filters.midfielders')}
           </button>
           <button
             onClick={() => setPositionFilter('FWD')}
@@ -124,7 +134,7 @@ export default function PlayersPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Forwards
+            {t('filters.forwards')}
           </button>
         </div>
 
@@ -157,7 +167,7 @@ export default function PlayersPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <span>📅</span>
-                  <span>{player.age} years old</span>
+                  <span>{player.age} {t('yearsOld')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span>⚽</span>
@@ -170,15 +180,15 @@ export default function PlayersPage() {
                   <div className="font-bold text-xl text-team-primary">
                     {player.stats.appearances}
                   </div>
-                  <div className="text-xs text-text-muted uppercase">Apps</div>
+                  <div className="text-xs text-text-muted uppercase">{t('stats.apps')}</div>
                 </div>
                 <div className="text-center">
                   <div className="font-bold text-xl text-team-primary">{player.stats.goals}</div>
-                  <div className="text-xs text-text-muted uppercase">Goals</div>
+                  <div className="text-xs text-text-muted uppercase">{t('stats.goals')}</div>
                 </div>
                 <div className="text-center">
                   <div className="font-bold text-xl text-team-primary">{player.stats.assists}</div>
-                  <div className="text-xs text-text-muted uppercase">Assists</div>
+                  <div className="text-xs text-text-muted uppercase">{t('stats.assists')}</div>
                 </div>
               </div>
             </div>
@@ -187,7 +197,7 @@ export default function PlayersPage() {
 
         {displayPlayers.length === 0 && (
           <div className="text-center py-12 text-text-muted">
-            No players found in this position.
+            {t('noPlayers')}
           </div>
         )}
       </div>

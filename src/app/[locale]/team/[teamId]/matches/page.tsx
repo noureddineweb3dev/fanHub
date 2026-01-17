@@ -7,9 +7,11 @@ import { getTeamById } from '@/data/teams';
 import { getMatchesByTeam, getUpcomingMatches, getRecentMatches } from '@/data/matches';
 import { ArrowLeft, Calendar, MapPin, Trophy } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export default function MatchesPage() {
   const params = useParams();
+  const locale = params.locale as string;
   const teamId = params.teamId as string;
   const team = getTeamById(teamId);
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'recent'>('all');
@@ -20,9 +22,9 @@ export default function MatchesPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Team Not Found</h1>
-          <Link href="/select-team" className="text-team-primary hover:underline">
-            Choose a different team
+          <h1 className="text-2xl font-bold mb-2">{tCommon('teamNotFound')}</h1>
+          <Link href={`/${locale}/select-team`} className="text-team-primary hover:underline">
+            {tCommon('changeTeam')}
           </Link>
         </div>
       </div>
@@ -38,7 +40,7 @@ export default function MatchesPage() {
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleDateString(locale, {
       weekday: 'short',
       month: 'short',
       day: 'numeric',
@@ -50,12 +52,15 @@ export default function MatchesPage() {
     <main className="min-h-screen pb-8">
       <div className="gradient-team text-white">
         <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="absolute top-6 end-6">
+            <LanguageSwitcher />
+          </div>
           <Link
-            href={`/team/${teamId}`}
+            href={`/${locale}/team/${teamId}`}
             className="inline-flex items-center gap-2 mb-6 opacity-90 hover:opacity-100 transition-opacity"
           >
             <ArrowLeft size={20} />
-            Back to Dashboard
+            {tCommon('backToDashboard')}
           </Link>
 
           <h1 className="text-4xl font-bold">{t('title')}</h1>
@@ -151,7 +156,7 @@ export default function MatchesPage() {
                 <div className="flex items-center gap-4 flex-1 justify-end min-w-0">
                   <div className="text-end min-w-0">
                     <div className="font-bold text-lg truncate">{match.opponent}</div>
-                    <div className="text-sm text-text-muted">{match.isHome ? 'Away' : 'Home'}</div>
+                    <div className="text-sm text-text-muted">{match.isHome ? t('away') : t('home')}</div>
                   </div>
                   <div className="text-4xl shrink-0">{match.opponentFlag}</div>
                 </div>
@@ -172,7 +177,7 @@ export default function MatchesPage() {
         </div>
 
         {displayMatches.length === 0 && (
-          <div className="text-center py-12 text-text-muted">No matches found.</div>
+          <div className="text-center py-12 text-text-muted">{t('noMatches')}</div>
         )}
       </div>
     </main>

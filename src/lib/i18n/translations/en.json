@@ -3,6 +3,7 @@
     "appName": "FanHub",
     "changeTeam": "Change Team",
     "backToDashboard": "Back to Dashboard",
+    "teamNotFound": "Team Not Found",
     "search": "Search",
     "all": "All",
     "loading": "Loading...",
@@ -58,7 +59,8 @@
     },
     "home": "Home",
     "away": "Away",
-    "vs": "VS"
+    "vs": "VS",
+    "noMatches": "No matches found."
   },
   "players": {
     "title": "Squad",
@@ -81,7 +83,8 @@
       "goals": "Goals",
       "assists": "Assists"
     },
-    "yearsOld": "years old"
+    "yearsOld": "years old",
+    "noPlayers": "No players found in this position."
   },
   "news": {
     "title": "News",
