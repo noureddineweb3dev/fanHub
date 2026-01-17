@@ -1,9 +1,12 @@
 import { getRequestConfig } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 import { locales } from './config';
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale as any)) notFound();
+  if (!locales.includes(locale as any)) {
+    return {
+      messages: (await import(`./translations/en.json`)).default,
+    };
+  }
 
   return {
     messages: (await import(`./translations/${locale}.json`)).default,

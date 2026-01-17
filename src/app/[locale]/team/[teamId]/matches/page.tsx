@@ -6,12 +6,15 @@ import Link from 'next/link';
 import { getTeamById } from '@/data/teams';
 import { getMatchesByTeam, getUpcomingMatches, getRecentMatches } from '@/data/matches';
 import { ArrowLeft, Calendar, MapPin, Trophy } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function MatchesPage() {
   const params = useParams();
   const teamId = params.teamId as string;
   const team = getTeamById(teamId);
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'recent'>('all');
+  const t = useTranslations('matches');
+  const tCommon = useTranslations('common');
 
   if (!team) {
     return (
@@ -55,8 +58,10 @@ export default function MatchesPage() {
             Back to Dashboard
           </Link>
 
-          <h1 className="text-4xl font-bold">Matches</h1>
-          <p className="text-lg opacity-90 mt-2">{team.name} fixture schedule</p>
+          <h1 className="text-4xl font-bold">{t('title')}</h1>
+          <p className="text-lg opacity-90 mt-2">
+            {team.name} {t('subtitle')}
+          </p>
         </div>
       </div>
 
@@ -70,7 +75,7 @@ export default function MatchesPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            All Matches
+            {t('filters.all')}
           </button>
           <button
             onClick={() => setFilter('upcoming')}
@@ -80,7 +85,7 @@ export default function MatchesPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Upcoming ({upcomingMatches.length})
+            {t('filters.upcoming')} ({upcomingMatches.length})
           </button>
           <button
             onClick={() => setFilter('recent')}
@@ -90,7 +95,7 @@ export default function MatchesPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Recent ({recentMatches.length})
+            {t('filters.recent')} ({recentMatches.length})
           </button>
         </div>
 
@@ -115,10 +120,10 @@ export default function MatchesPage() {
                   }`}
                 >
                   {match.status === 'upcoming'
-                    ? 'Upcoming'
+                    ? t('status.upcoming')
                     : match.status === 'live'
-                    ? 'Live'
-                    : 'Full Time'}
+                    ? t('status.live')
+                    : t('status.finished')}
                 </span>
               </div>
 
@@ -127,7 +132,9 @@ export default function MatchesPage() {
                   <div className="text-4xl shrink-0">{team.flag}</div>
                   <div className="min-w-0">
                     <div className="font-bold text-lg truncate">{team.name}</div>
-                    <div className="text-sm text-text-muted">{match.isHome ? 'Home' : 'Away'}</div>
+                    <div className="text-sm text-text-muted">
+                      {match.isHome ? t('home') : t('away')}
+                    </div>
                   </div>
                 </div>
 
