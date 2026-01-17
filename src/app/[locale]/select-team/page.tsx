@@ -6,6 +6,7 @@ import { teams, getTeamsByType, searchTeams } from '@/data/teams';
 import { Team } from '@/lib/types/team';
 import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export default function SelectTeamPage() {
   const router = useRouter();
@@ -30,6 +31,9 @@ export default function SelectTeamPage() {
   return (
     <main className="min-h-screen p-6 pb-24">
       <div className="max-w-4xl mx-auto">
+        <div className="absolute top-6 right-6">
+          <LanguageSwitcher />
+        </div>
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">{t('title')}</h1>
           <p className="text-text-secondary">{t('subtitle')}</p>

@@ -5,6 +5,7 @@ import { getTeamById } from '@/data/teams';
 import Link from 'next/link';
 import { ArrowLeft, Trophy, Users, Newspaper, Video } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export default function TeamDashboardPage() {
   const params = useParams();
@@ -32,6 +33,9 @@ export default function TeamDashboardPage() {
     <main className="min-h-screen">
       <div className="gradient-team text-white">
         <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="absolute top-6 right-6">
+            <LanguageSwitcher />
+          </div>
           <Link
             href={`/${locale}/select-team`}
             className="inline-flex items-center gap-2 mb-6 opacity-90 hover:opacity-100 transition-opacity"
