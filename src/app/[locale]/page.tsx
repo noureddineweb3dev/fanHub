@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex items-center justify-center p-8">
-      <div className="absolute top-6 right-6">
+      <div className="absolute top-6 end-6">
         <LanguageSwitcher />
       </div>
       
@@ -38,7 +38,7 @@ export default function Home() {
           href={`/${locale}/select-team`}
           className="gradient-team inline-block px-8 py-4 rounded-xl font-semibold text-white text-lg hover:opacity-90 transition-opacity"
         >
-          {t('chooseTeam')} →
+          {t('chooseTeam')} {locale === 'ar' ? '←' : '→'}
         </Link>
         
         <div className="mt-12 flex justify-center gap-8 text-text-muted text-sm">

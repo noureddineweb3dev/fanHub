@@ -32,9 +32,60 @@
     @apply bg-background-dark text-text-primary antialiased font-sans;
   }
 
+  html[dir='rtl'],
   html[lang='ar'] {
     direction: rtl;
-    font-family: var(--font-arabic);
+  }
+
+  html[lang='ar'] body {
+    font-family: var(--font-cairo), system-ui, sans-serif;
+  }
+}
+
+/* RTL-specific utilities */
+@layer utilities {
+  /* Logical properties for spacing - work automatically with RTL */
+  .start-4 {
+    inset-inline-start: 1rem;
+  }
+  
+  .end-6 {
+    inset-inline-end: 1.5rem;
+  }
+  
+  .end-0 {
+    inset-inline-end: 0;
+  }
+  
+  .ps-12 {
+    padding-inline-start: 3rem;
+  }
+  
+  .pe-4 {
+    padding-inline-end: 1rem;
+  }
+  
+  .ms-auto {
+    margin-inline-start: auto;
+  }
+  
+  .text-start {
+    text-align: start;
+  }
+  
+  .text-end {
+    text-align: end;
+  }
+  
+  /* RTL-specific overrides for existing classes */
+  [dir='rtl'] .rtl\:flip {
+    transform: scaleX(-1);
+  }
+  
+  /* Auto-flip arrow icons in RTL */
+  [dir='rtl'] svg[class*='arrow'],
+  [dir='rtl'] .arrow-icon {
+    transform: scaleX(-1);
   }
 }
 

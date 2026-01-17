@@ -33,7 +33,7 @@ export default function TeamDashboardPage() {
     <main className="min-h-screen">
       <div className="gradient-team text-white">
         <div className="max-w-4xl mx-auto px-6 py-8">
-          <div className="absolute top-6 right-6">
+          <div className="absolute top-6 end-6">
             <LanguageSwitcher />
           </div>
           <Link

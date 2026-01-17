@@ -149,7 +149,7 @@ export default function MatchesPage() {
                 )}
 
                 <div className="flex items-center gap-4 flex-1 justify-end min-w-0">
-                  <div className="text-right min-w-0">
+                  <div className="text-end min-w-0">
                     <div className="font-bold text-lg truncate">{match.opponent}</div>
                     <div className="text-sm text-text-muted">{match.isHome ? 'Away' : 'Home'}</div>
                   </div>

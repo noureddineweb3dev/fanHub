@@ -50,7 +50,7 @@ export default function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full mt-2 right-0 bg-background-card border border-background-light rounded-lg shadow-lg overflow-hidden min-w-[200px] z-50">
+        <div className="absolute top-full mt-2 end-0 bg-background-card border border-background-light rounded-lg shadow-lg overflow-hidden min-w-[200px] z-50">
           {locales.map((locale) => (
             <button
               key={locale}
@@ -62,7 +62,7 @@ export default function LanguageSwitcher() {
               <span className="text-2xl">{localeFlags[locale]}</span>
               <span className="font-medium">{localeNames[locale]}</span>
               {locale === currentLocale && (
-                <svg className="w-5 h-5 ml-auto text-team-primary" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 ms-auto text-team-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               )}

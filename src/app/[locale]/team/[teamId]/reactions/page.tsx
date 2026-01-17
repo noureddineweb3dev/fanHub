@@ -91,7 +91,7 @@ export default function ReactionsPage() {
         <div className="mb-6">
           <div className="relative">
             <Search
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted"
+              className="absolute start-4 top-1/2 -translate-y-1/2 text-text-muted"
               size={20}
             />
             <input
@@ -99,7 +99,7 @@ export default function ReactionsPage() {
               placeholder="Search reactions by match, team, or channel..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-background-card border border-background-light rounded-xl py-4 pl-12 pr-4 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-team-primary transition-colors"
+              className="w-full bg-background-card border border-background-light rounded-xl py-4 ps-12 pe-4 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-team-primary transition-colors"
             />
           </div>
         </div>
@@ -135,7 +135,7 @@ export default function ReactionsPage() {
                     <Play className="text-white" size={32} fill="white" />
                   </div>
                 </div>
-                <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
+                <div className="absolute bottom-2 end-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
                   {video.duration}
                 </div>
               </div>

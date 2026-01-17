@@ -31,7 +31,7 @@ export default function SelectTeamPage() {
   return (
     <main className="min-h-screen p-6 pb-24">
       <div className="max-w-4xl mx-auto">
-        <div className="absolute top-6 right-6">
+        <div className="absolute top-6 end-6">
           <LanguageSwitcher />
         </div>
         <div className="mb-8">
@@ -40,13 +40,13 @@ export default function SelectTeamPage() {
         </div>
 
         <div className="mb-6 relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" size={20} />
+          <Search className="absolute start-4 top-1/2 -translate-y-1/2 text-text-muted" size={20} />
           <input
             type="text"
             placeholder={t('searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-background-card border border-background-light rounded-xl py-4 pl-12 pr-4 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-team-primary transition-colors"
+            className="w-full bg-background-card border border-background-light rounded-xl py-4 ps-12 pe-4 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-team-primary transition-colors"
           />
         </div>
 
@@ -88,7 +88,7 @@ export default function SelectTeamPage() {
             <button
               key={team.id}
               onClick={() => handleTeamSelect(team)}
-              className="bg-background-card hover:bg-background-light border border-background-light rounded-xl p-6 text-left transition-all hover:scale-105 active:scale-100"
+              className="bg-background-card hover:bg-background-light border border-background-light rounded-xl p-6 text-start transition-all hover:scale-105 active:scale-100"
             >
               <div className="flex items-center gap-4">
                 <div className="text-5xl">{team.flag}</div>
