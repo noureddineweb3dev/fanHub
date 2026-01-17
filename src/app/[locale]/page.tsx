@@ -1,20 +1,22 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 export default function Home() {
   const router = useRouter();
+  const params = useParams();
+  const locale = params.locale as string;
   const t = useTranslations('landing');
 
   useEffect(() => {
     const savedTeam = localStorage.getItem('selectedTeam');
     if (savedTeam) {
-      router.push(`/team/${savedTeam}`);
+      router.push(`/${locale}/team/${savedTeam}`);
     }
-  }, [router]);
+  }, [router, locale]);
 
   return (
     <main className="min-h-screen flex items-center justify-center p-8">
@@ -26,7 +28,7 @@ export default function Home() {
         <p className="text-text-secondary text-xl mb-8">{t('description')}</p>
 
         <Link
-          href="/select-team"
+          href={`/${locale}/select-team`}
           className="gradient-team inline-block px-8 py-4 rounded-xl font-semibold text-white text-lg hover:opacity-90 transition-opacity"
         >
           {t('chooseTeam')} →
