@@ -2,13 +2,10 @@ import { getRequestConfig } from 'next-intl/server';
 import { locales } from './config';
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale as any)) {
-    return {
-      messages: (await import(`./translations/en.json`)).default,
-    };
-  }
-
+  const validLocale = locale && locales.includes(locale as any) ? locale : 'en';
+  
   return {
-    messages: (await import(`./translations/${locale}.json`)).default,
+    locale: validLocale,
+    messages: (await import(`./translations/${validLocale}.json`)).default,
   };
 });
