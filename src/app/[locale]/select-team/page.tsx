@@ -5,12 +5,14 @@ import { useRouter } from 'next/navigation';
 import { teams, getTeamsByType, searchTeams } from '@/data/teams';
 import { Team } from '@/lib/types/team';
 import { Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function SelectTeamPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTab, setSelectedTab] = useState<'all' | 'national' | 'club'>('all');
-
+  const t = useTranslations('teamSelection');
+  const tCommon = useTranslations('common');
   const filteredTeams = searchQuery
     ? searchTeams(searchQuery)
     : selectedTab === 'all'
@@ -26,15 +28,15 @@ export default function SelectTeamPage() {
     <main className="min-h-screen p-6 pb-24">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Select Your Team</h1>
-          <p className="text-text-secondary">Choose the team you want to follow</p>
+          <h1 className="text-4xl font-bold mb-2">{t('title')}</h1>
+          <p className="text-text-secondary">{t('subtitle')}</p>
         </div>
 
         <div className="mb-6 relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" size={20} />
           <input
             type="text"
-            placeholder="Search teams, countries, leagues..."
+            placeholder={t('searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-background-card border border-background-light rounded-xl py-4 pl-12 pr-4 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-team-primary transition-colors"
@@ -50,7 +52,7 @@ export default function SelectTeamPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            All Teams
+            {t('tabs.all')}
           </button>
           <button
             onClick={() => setSelectedTab('national')}
@@ -60,7 +62,7 @@ export default function SelectTeamPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            National
+            {t('tabs.national')}
           </button>
           <button
             onClick={() => setSelectedTab('club')}
@@ -70,7 +72,7 @@ export default function SelectTeamPage() {
                 : 'bg-background-card text-text-secondary hover:bg-background-light'
             }`}
           >
-            Clubs
+            {t('tabs.clubs')}
           </button>
         </div>
 
