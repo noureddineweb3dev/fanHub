@@ -4,11 +4,14 @@ import { useParams } from 'next/navigation';
 import { getTeamById } from '@/data/teams';
 import Link from 'next/link';
 import { ArrowLeft, Trophy, Users, Newspaper, Video } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function TeamDashboardPage() {
   const params = useParams();
   const teamId = params.teamId as string;
   const team = getTeamById(teamId);
+  const t = useTranslations('dashboard');
+  const tCommon = useTranslations('common');
 
   if (!team) {
     return (
