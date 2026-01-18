@@ -1,30 +1,86 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { getTeamById } from '@/data/teams';
 import { getPlayersByTeam, getPlayersByPosition } from '@/data/players';
 import { Player } from '@/lib/types/player';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Users, Shield, Target, Zap, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+
+type PositionFilter = 'all' | Player['position'];
 
 export default function PlayersPage() {
   const params = useParams();
   const locale = params.locale as string;
   const teamId = params.teamId as string;
   const team = getTeamById(teamId);
-  const [positionFilter, setPositionFilter] = useState<'all' | Player['position']>('all');
+  const [positionFilter, setPositionFilter] = useState<PositionFilter>('all');
   const t = useTranslations('players');
   const tCommon = useTranslations('common');
 
+  const allPlayers = useMemo(() => getPlayersByTeam(teamId), [teamId]);
+  const displayPlayers = useMemo(() => {
+    return positionFilter === 'all' ? allPlayers : getPlayersByPosition(teamId, positionFilter);
+  }, [teamId, positionFilter, allPlayers]);
+
+  const getPositionColor = useCallback((position: Player['position']) => {
+    switch (position) {
+      case 'GK':
+        return 'bg-status-warning/20 text-status-warning border-status-warning/30';
+      case 'DEF':
+        return 'bg-status-info/20 text-status-info border-status-info/30';
+      case 'MID':
+        return 'bg-status-success/20 text-status-success border-status-success/30';
+      case 'FWD':
+        return 'bg-status-danger/20 text-status-danger border-status-danger/30';
+    }
+  }, []);
+
+  const getPositionIcon = useCallback((position: Player['position']) => {
+    switch (position) {
+      case 'GK':
+        return Shield;
+      case 'DEF':
+        return Shield;
+      case 'MID':
+        return Target;
+      case 'FWD':
+        return Zap;
+      default:
+        return User;
+    }
+  }, []);
+
+  const getPositionName = useCallback((position: Player['position']) => {
+    switch (position) {
+      case 'GK':
+        return t('positions.goalkeeper') || 'Goalkeeper';
+      case 'DEF':
+        return t('positions.defender') || 'Defender';
+      case 'MID':
+        return t('positions.midfielder') || 'Midfielder';
+      case 'FWD':
+        return t('positions.forward') || 'Forward';
+    }
+  }, [t]);
+
+  const handleFilterChange = useCallback((filter: PositionFilter) => {
+    setPositionFilter(filter);
+  }, []);
+
   if (!team) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-background-card/30">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">{tCommon('teamNotFound')}</h1>
-          <Link href={`/${locale}/select-team`} className="text-team-primary hover:underline">
+          <div className="text-6xl mb-4 animate-bounce">⚠️</div>
+          <h1 className="text-2xl font-bold mb-2 text-text-primary">{tCommon('teamNotFound') || 'Team Not Found'}</h1>
+          <Link
+            href={`/${locale}/select-team`}
+            className="inline-flex items-center gap-2 text-team-primary hover:underline transition-all duration-200 hover:scale-105"
+          >
             {tCommon('changeTeam')}
           </Link>
         </div>
@@ -32,172 +88,187 @@ export default function PlayersPage() {
     );
   }
 
-  const allPlayers = getPlayersByTeam(teamId);
-  const displayPlayers =
-    positionFilter === 'all' ? allPlayers : getPlayersByPosition(teamId, positionFilter);
+  const teamGradient = `linear-gradient(135deg, ${team.colors.primary} 0%, ${team.colors.secondary} 100%)`;
 
-  const getPositionColor = (position: Player['position']) => {
-    switch (position) {
-      case 'GK':
-        return 'bg-status-warning text-white';
-      case 'DEF':
-        return 'bg-status-info text-white';
-      case 'MID':
-        return 'bg-status-success text-white';
-      case 'FWD':
-        return 'bg-status-danger text-white';
-    }
-  };
-
-  const getPositionName = (position: Player['position']) => {
-    switch (position) {
-      case 'GK':
-        return t('positions.goalkeeper');
-      case 'DEF':
-        return t('positions.defender');
-      case 'MID':
-        return t('positions.midfielder');
-      case 'FWD':
-        return t('positions.forward');
-    }
-  };
+  const positionFilters = [
+    { id: 'all' as PositionFilter, label: t('filters.all') || 'All', icon: Users },
+    { id: 'GK' as PositionFilter, label: t('filters.goalkeepers') || 'Goalkeepers', icon: Shield },
+    { id: 'DEF' as PositionFilter, label: t('filters.defenders') || 'Defenders', icon: Shield },
+    { id: 'MID' as PositionFilter, label: t('filters.midfielders') || 'Midfielders', icon: Target },
+    { id: 'FWD' as PositionFilter, label: t('filters.forwards') || 'Forwards', icon: Zap },
+  ];
 
   return (
-    <main className="min-h-screen pb-8">
-      <div className="gradient-team text-white">
-        <div className="max-w-4xl mx-auto px-6 py-8">
-          <div className="absolute top-6 end-6">
+    <main className="min-h-screen bg-gradient-to-br from-background via-background to-background-card/30 pb-8">
+      {/* Header with team colors */}
+      <div
+        className="relative text-white overflow-hidden"
+        style={{
+          background: teamGradient,
+        }}
+      >
+        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${team.colors.primary}44, ${team.colors.secondary}44)` }} />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className="absolute top-6 end-6 z-10">
             <LanguageSwitcher />
           </div>
+
           <Link
             href={`/${locale}/team/${teamId}`}
-            className="inline-flex items-center gap-2 mb-6 opacity-90 hover:opacity-100 transition-opacity"
+            className="inline-flex items-center gap-2 mb-6 opacity-90 hover:opacity-100 transition-all duration-200 hover:scale-105 group"
           >
-            <ArrowLeft size={20} />
-            {tCommon('backToDashboard')}
+            <ArrowLeft
+              size={20}
+              className="group-hover:-translate-x-1 transition-transform"
+            />
+            <span className="font-medium">{tCommon('backToDashboard') || 'Back to Dashboard'}</span>
           </Link>
 
-          <h1 className="text-4xl font-bold">{t('title')}</h1>
-          <p className="text-lg opacity-90 mt-2">
-            {allPlayers.length} {t('subtitle')}
-          </p>
+          <div className="flex items-center gap-4 mb-2">
+            <Users className="w-8 h-8 sm:w-10 sm:h-10 filter drop-shadow-lg" />
+            <div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-1 drop-shadow-lg">
+                {t('title') || 'Players'}
+              </h1>
+              <p className="text-base sm:text-lg opacity-90">
+                {allPlayers.length} {t('subtitle') || 'players in squad'}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        <div className="flex gap-2 mb-6 flex-wrap">
-          <button
-            onClick={() => setPositionFilter('all')}
-            className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-              positionFilter === 'all'
-                ? 'bg-team-primary text-white'
-                : 'bg-background-card text-text-secondary hover:bg-background-light'
-            }`}
-          >
-            {t('filters.all')}
-          </button>
-          <button
-            onClick={() => setPositionFilter('GK')}
-            className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-              positionFilter === 'GK'
-                ? 'bg-team-primary text-white'
-                : 'bg-background-card text-text-secondary hover:bg-background-light'
-            }`}
-          >
-            {t('filters.goalkeepers')}
-          </button>
-          <button
-            onClick={() => setPositionFilter('DEF')}
-            className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-              positionFilter === 'DEF'
-                ? 'bg-team-primary text-white'
-                : 'bg-background-card text-text-secondary hover:bg-background-light'
-            }`}
-          >
-            {t('filters.defenders')}
-          </button>
-          <button
-            onClick={() => setPositionFilter('MID')}
-            className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-              positionFilter === 'MID'
-                ? 'bg-team-primary text-white'
-                : 'bg-background-card text-text-secondary hover:bg-background-light'
-            }`}
-          >
-            {t('filters.midfielders')}
-          </button>
-          <button
-            onClick={() => setPositionFilter('FWD')}
-            className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-              positionFilter === 'FWD'
-                ? 'bg-team-primary text-white'
-                : 'bg-background-card text-text-secondary hover:bg-background-light'
-            }`}
-          >
-            {t('filters.forwards')}
-          </button>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap gap-3 mb-8 justify-center sm:justify-start">
+          {positionFilters.map((filter) => {
+            const Icon = filter.icon;
+            const isActive = positionFilter === filter.id;
+            return (
+              <button
+                key={filter.id}
+                onClick={() => handleFilterChange(filter.id)}
+                className={`group relative px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                  isActive
+                    ? 'bg-gradient-to-r from-team-primary to-purple-500 text-white shadow-lg shadow-team-primary/30 scale-105'
+                    : 'bg-background-card/90 backdrop-blur-sm text-text-secondary hover:bg-background-light border border-background-light hover:border-team-primary/50 hover:scale-102'
+                }`}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  <Icon className={`w-4 h-4 transition-transform ${isActive ? 'scale-110' : ''}`} />
+                  {filter.label}
+                </span>
+                {isActive && (
+                  <span className="absolute inset-0 bg-gradient-to-r from-team-primary to-purple-500 rounded-xl blur-xl opacity-50 -z-0" />
+                )}
+              </button>
+            );
+          })}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {displayPlayers.map((player) => (
-            <div
-              key={player.id}
-              className="bg-background-card rounded-xl p-6 hover:bg-background-light transition-colors"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <div className="text-3xl font-bold text-team-primary mb-2">#{player.number}</div>
-                  <span
-                    className={`${getPositionColor(
-                      player.position
-                    )} text-xs px-3 py-1 rounded-full font-semibold`}
-                  >
-                    {player.position}
-                  </span>
-                </div>
-                <div className="text-4xl">{team.flag}</div>
-              </div>
+        {/* Players Grid */}
+        {displayPlayers.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            {displayPlayers.map((player, index) => {
+              const PositionIcon = getPositionIcon(player.position);
+              return (
+                <div
+                  key={player.id}
+                  className="group relative bg-background-card/90 backdrop-blur-md hover:bg-background-card border-2 border-background-light hover:border-team-primary/60 rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-team-primary/20 animate-fade-in-up overflow-hidden"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300"
+                    style={{
+                      background: `linear-gradient(135deg, ${team.colors.primary}22, ${team.colors.secondary}22)`,
+                    }}
+                  />
 
-              <h3 className="font-bold text-xl mb-1">{player.name}</h3>
-
-              <div className="text-sm text-text-muted mb-4 space-y-1">
-                <div className="flex items-center gap-2">
-                  <span>🏟️</span>
-                  <span>{player.club}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>📅</span>
-                  <span>{player.age} {t('yearsOld')}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>⚽</span>
-                  <span>{getPositionName(player.position)}</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-background-light">
-                <div className="text-center">
-                  <div className="font-bold text-xl text-team-primary">
-                    {player.stats.appearances}
+                  {/* Header */}
+                  <div className="relative z-10 flex items-start justify-between mb-4">
+                    <div>
+                      <div className="text-4xl sm:text-5xl font-bold text-team-primary mb-2 drop-shadow-lg">
+                        #{player.number}
+                      </div>
+                      <span
+                        className={`${getPositionColor(player.position)} border-2 text-xs px-3 py-1.5 rounded-full font-semibold flex items-center gap-1.5 w-fit`}
+                      >
+                        <PositionIcon className="w-3 h-3" />
+                        {player.position}
+                      </span>
+                    </div>
+                    <div className="text-5xl sm:text-6xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 filter drop-shadow-lg">
+                      {team.flag}
+                    </div>
                   </div>
-                  <div className="text-xs text-text-muted uppercase">{t('stats.apps')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-bold text-xl text-team-primary">{player.stats.goals}</div>
-                  <div className="text-xs text-text-muted uppercase">{t('stats.goals')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-bold text-xl text-team-primary">{player.stats.assists}</div>
-                  <div className="text-xs text-text-muted uppercase">{t('stats.assists')}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
 
-        {displayPlayers.length === 0 && (
-          <div className="text-center py-12 text-text-muted">
-            {t('noPlayers')}
+                  {/* Player Name */}
+                  <h3 className="relative z-10 font-bold text-xl sm:text-2xl mb-4 text-text-primary group-hover:text-team-primary transition-colors">
+                    {player.name}
+                  </h3>
+
+                  {/* Player Info */}
+                  <div className="relative z-10 text-sm text-text-muted mb-6 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">🏟️</span>
+                      <span className="font-medium">{player.club}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">📅</span>
+                      <span>{player.age} {t('yearsOld') || 'years old'}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <PositionIcon className="w-4 h-4" />
+                      <span>{getPositionName(player.position)}</span>
+                    </div>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="relative z-10 grid grid-cols-3 gap-3 pt-4 border-t border-background-light">
+                    <div className="text-center group/stat">
+                      <div className="font-bold text-xl sm:text-2xl text-team-primary mb-1 group-hover/stat:scale-110 transition-transform">
+                        {player.stats.appearances}
+                      </div>
+                      <div className="text-xs text-text-muted uppercase tracking-wide font-medium">
+                        {t('stats.apps') || 'Apps'}
+                      </div>
+                    </div>
+                    <div className="text-center group/stat">
+                      <div className="font-bold text-xl sm:text-2xl text-team-primary mb-1 group-hover/stat:scale-110 transition-transform">
+                        {player.stats.goals}
+                      </div>
+                      <div className="text-xs text-text-muted uppercase tracking-wide font-medium">
+                        {t('stats.goals') || 'Goals'}
+                      </div>
+                    </div>
+                    <div className="text-center group/stat">
+                      <div className="font-bold text-xl sm:text-2xl text-team-primary mb-1 group-hover/stat:scale-110 transition-transform">
+                        {player.stats.assists}
+                      </div>
+                      <div className="text-xs text-text-muted uppercase tracking-wide font-medium">
+                        {t('stats.assists') || 'Assists'}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="text-center py-20">
+            <div className="max-w-md mx-auto">
+              <div className="text-7xl mb-6 animate-bounce">👤</div>
+              <h3 className="text-2xl sm:text-3xl font-bold text-text-primary mb-3">
+                {t('noPlayers') || 'No players found'}
+              </h3>
+              <p className="text-text-muted text-lg leading-relaxed">
+                {positionFilter === 'all'
+                  ? 'No players available for this team.'
+                  : `No ${getPositionName(positionFilter)} available for this team.`}
+              </p>
+            </div>
           </div>
         )}
       </div>
